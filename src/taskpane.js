@@ -32,41 +32,39 @@ async function insertText() {
 async function insertOMML() {
   try {
     await Word.run(async (context) => {
-      // 这里演示一个最简单的 E = mc^2 示例
-      // 注意使用 <m:oMathPara> 作为顶层标签，以便 Word 能正确解析
+      // 完整的 Word OOXML 结构
       const omml = `
-<m:oMathPara xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
-  <m:oMath>
-    <m:r>
-      <m:t>E</m:t>
-    </m:r>
-    <m:r>
-      <m:t>=</m:t>
-    </m:r>
-    <m:r>
-      <m:t>m</m:t>
-    </m:r>
-    <m:sSup>
-      <m:e>
-        <m:r>
-          <m:t>c</m:t>
-        </m:r>
-      </m:e>
-      <m:sup>
-        <m:r>
-          <m:t>2</m:t>
-        </m:r>
-      </m:sup>
-    </m:sSup>
-  </m:oMath>
-</m:oMathPara>
+<w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:r>
+    <m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
+      <m:r>
+        <m:t>E</m:t>
+      </m:r>
+      <m:r>
+        <m:t>=</m:t>
+      </m:r>
+      <m:r>
+        <m:t>m</m:t>
+      </m:r>
+      <m:sSup>
+        <m:e>
+          <m:r>
+            <m:t>c</m:t>
+          </m:r>
+        </m:e>
+        <m:sup>
+          <m:r>
+            <m:t>2</m:t>
+          </m:r>
+        </m:sup>
+      </m:sSup>
+    </m:oMath>
+  </w:r>
+</w:p>
 `;
 
-      // 获取当前选区
       const range = context.document.getSelection();
-      // 插入 OMML
       range.insertOoxml(omml, Word.InsertLocation.replace);
-
       await context.sync();
       console.log("数学公式已插入！");
     });
