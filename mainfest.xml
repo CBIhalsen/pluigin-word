@@ -6,18 +6,18 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Word Plugin" />
   <Description DefaultValue="A Word plugin example." />
-  <IconUrl DefaultValue="https://raw.githubusercontent.com/CBIhalsen/pluigin-word/main/assets/icon.png" />
-  <HighResolutionIconUrl DefaultValue="https://raw.githubusercontent.com/CBIhalsen/pluigin-word/main/assets/hi-res-icon.png" />
+  <IconUrl DefaultValue="https://cbihalsen.github.io/pluigin-word/assets/icon.png" />
+  <HighResolutionIconUrl DefaultValue="https://cbihalsen.github.io/pluigin-word/assets/hi-res-icon.png" />
   <SupportUrl DefaultValue="https://github.com/CBIhalsen/pluigin-word" />
   <AppDomains>
-    <AppDomain>https://raw.githubusercontent.com</AppDomain>
+    <AppDomain>https://cbihalsen.github.io</AppDomain>
     <AppDomain>https://github.com</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Document" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://raw.githubusercontent.com/CBIhalsen/pluigin-word/main/src/taskpane.html" />
+    <SourceLocation DefaultValue="https://cbihalsen.github.io/pluigin-word/src/taskpane.html" />
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>
