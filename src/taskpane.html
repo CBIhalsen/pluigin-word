@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Word Add-in</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script>
+        // 等待 Office 初始化
+        Office.onReady((info) => {
+            if (info.host === Office.HostType.Word) {
+                // 在这里初始化你的加载项
+                document.getElementById("insertOMMLButton").onclick = insertOMML;
+            }
+        });
+    </script>
+    <script src="taskpane.js"></script>
+</head>
+<body>
+    <h1>Word 插件</h1>
+    <button id="insertOMMLButton">插入数学公式</button>
+</body>
+</html>
