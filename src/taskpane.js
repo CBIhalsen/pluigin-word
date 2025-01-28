@@ -28,33 +28,46 @@ async function insertText() {
   }
 }
 
-// 插入 OMML 数学公式
-async function insertOMML() {
+// 插入 MathML 数学公式
+async function insertMathML(mathml) {
   try {
     await Word.run(async (context) => {
-      const omml = `
-<w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-     xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
-  <w:r>
-    <m:oMath>
-      <m:r><m:t>E</m:t></m:r>
-      <m:r><m:t>=</m:t></m:r>
-      <m:r><m:t>m</m:t></m:r>
-      <m:sSup>
-        <m:e><m:r><m:t>c</m:t></m:r></m:e>
-        <m:sup><m:r><m:t>2</m:t></m:r></m:sup>
-      </m:sSup>
-    </m:oMath>
-  </w:r>
-</w:p>
-`;
+      // 构建完整的 OOXML 包装
+      const fullOoxml = `
+        <w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+             xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
+          <w:r>
+            <m:oMath>
+              ${mathml}
+            </m:oMath>
+          </w:r>
+        </w:p>
+      `;
 
       const range = context.document.getSelection();
-      range.insertOoxml(omml, Word.InsertLocation.replace);
+      range.insertOoxml(fullOoxml, Word.InsertLocation.replace);
       await context.sync();
+      console.log("数学公式已插入！");
     });
   } catch (error) {
     console.error("插入公式时出错:", error);
     console.error("详细调试信息:", error.debugInfo);
   }
+}
+
+// 插入 OMML 数学公式（调用 insertMathML）
+async function insertOMML() {
+  // 示例 MathML 公式：E = mc²
+  const myMathML = `
+    <m:r><m:t>E</m:t></m:r>
+    <m:r><m:t>=</m:t></m:r>
+    <m:r><m:t>m</m:t></m:r>
+    <m:sSup>
+      <m:e><m:r><m:t>c</m:t></m:r></m:e>
+      <m:sup><m:r><m:t>2</m:t></m:r></m:sup>
+    </m:sSup>
+  `;
+
+  // 调用 insertMathML 函数
+  await insertMathML(myMathML);
 }
