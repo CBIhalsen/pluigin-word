@@ -32,31 +32,17 @@ async function insertText() {
 async function insertOMML() {
   try {
     await Word.run(async (context) => {
-      // 完整的 Word OOXML 结构
       const omml = `
-<w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<w:p xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+     xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
   <w:r>
-    <m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math">
-      <m:r>
-        <m:t>E</m:t>
-      </m:r>
-      <m:r>
-        <m:t>=</m:t>
-      </m:r>
-      <m:r>
-        <m:t>m</m:t>
-      </m:r>
+    <m:oMath>
+      <m:r><m:t>E</m:t></m:r>
+      <m:r><m:t>=</m:t></m:r>
+      <m:r><m:t>m</m:t></m:r>
       <m:sSup>
-        <m:e>
-          <m:r>
-            <m:t>c</m:t>
-          </m:r>
-        </m:e>
-        <m:sup>
-          <m:r>
-            <m:t>2</m:t>
-          </m:r>
-        </m:sup>
+        <m:e><m:r><m:t>c</m:t></m:r></m:e>
+        <m:sup><m:r><m:t>2</m:t></m:r></m:sup>
       </m:sSup>
     </m:oMath>
   </w:r>
@@ -66,9 +52,9 @@ async function insertOMML() {
       const range = context.document.getSelection();
       range.insertOoxml(omml, Word.InsertLocation.replace);
       await context.sync();
-      console.log("数学公式已插入！");
     });
   } catch (error) {
     console.error("插入公式时出错:", error);
+    console.error("详细调试信息:", error.debugInfo);
   }
 }
