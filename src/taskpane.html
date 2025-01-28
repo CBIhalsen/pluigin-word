@@ -4,16 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>Word Add-in</title>
+    <!-- 先加载 Office.js -->
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script>
-        // 等待 Office 初始化
-        Office.onReady((info) => {
-            if (info.host === Office.HostType.Word) {
-                // 在这里初始化你的加载项
-                document.getElementById("insertOMMLButton").onclick = insertOMML;
-            }
-        });
-    </script>
+    <!-- 然后加载你的 JS 文件 -->
     <script src="taskpane.js"></script>
 </head>
 <body>

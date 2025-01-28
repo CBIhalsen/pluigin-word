@@ -1,3 +1,11 @@
+// 等待 Office 初始化
+Office.onReady((info) => {
+    if (info.host === Office.HostType.Word) {
+        // 在这里初始化你的加载项
+        document.getElementById("insertOMMLButton").onclick = insertOMML;
+    }
+});
+
 // 插入 OMML 数学公式的函数
 async function insertOMML() {
     try {
